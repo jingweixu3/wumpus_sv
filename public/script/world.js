@@ -39,12 +39,11 @@ class Wumpus_world {
 
         let key_x = Math.floor(Math.random() * this.side_number);
         let key_y = Math.floor(Math.random() * this.side_number);
-        while(key_x === this.hero.pos[0] && key_y === this.hero.pos[1] && key_x === this.ghost[0] && key_y === this.ghost[1]){
+        while(key_x === this.hero.pos[0] && key_y === this.hero.pos[1] && key_x === this.ghost.pos[0] && key_y === this.ghost.pos[1]){
             key_x = Math.floor(Math.random() * this.side_number);
             key_y = Math.floor(Math.random() * this.side_number);
         }
-        this.ghost = new ghost([ghost_x, ghost_y], this);
-        this.key = new gold_key([], this);
+        this.key = new gold_key([key_x, key_y], this);
 
         //pits
         this.pits = new pits(this);
@@ -53,20 +52,19 @@ class Wumpus_world {
         while(mySet.size < pits_number){
             let x = Math.floor(Math.random() * this.side_number);
             let y = Math.floor(Math.random() * this.side_number);
-
-
-            if(!mySet.has([x,y]) && x !== this.hero.pos[0] && y !== this.hero.pos[1] && x !== this.key[0] && y !== this.key[1]){
-                mySet.add([x,y]);
+            let position = [];
+            position.push(x);
+            position.push(y);
+            if(!mySet.has(position) && position[0] !== this.hero.pos[0] && position[1]!== this.hero.pos[1] && position[0]!== this.key.pos[0] && position[1]!== this.key.pos[1]){
+                mySet.add(position);
+                console.log(position);
+                this.pits.addingPit(new pit(position, this));
             }
-        }
-        for (let i = 0; i < pits_number; i++){
-            this.pits.addingPit(new pit([mySet[i]],this.world));
         }
         console.log("finish setting up");
     }
 
     display(){
-        console.log("displayting");
         this.cells.display();
         this.pits.display();
         this.key.display();

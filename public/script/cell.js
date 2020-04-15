@@ -1,6 +1,6 @@
 class cell{
     constructor(status, pos, cell_canvas_size){
-        this.displayed = null;  //displayed or not displayed
+        this.displayed = CELLSTATUS.CLEAR;  //displayed or not displayed
         this.status = status;   // cell real status: empty cell, pit, ghost
         this.position = pos;         // position in the matrix
         this.cell_canvas_size = cell_canvas_size;   //cell size on the canvas

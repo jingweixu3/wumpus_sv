@@ -9,7 +9,6 @@ class pits{
     }
 
     display(){
-        console.log("dis pits");
         for(let i = 0; i < this.pits.length; i++){
             this.pits[i].display();
         }

@@ -211,7 +211,6 @@ class hero{
 
     //display agent
     display(){
-        console.log("displ her");
         let img;
         switch (this.facingDirection) {
             case DIRECTION.RIGHT:
@@ -227,8 +226,8 @@ class hero{
                 img = agentUpImg;
                 break;
         }
-        if (this.alive) {
-            image(img, this.pos[0] * this.world.cell_canvas_size, 
+        if (this.status) {
+            image(agentLeftImg, this.pos[0] * this.world.cell_canvas_size, 
                 this.pos[1] * this.world.cell_canvas_size, 
                 this.world.cell_canvas_size, this.world.cell_canvas_size);
         }
