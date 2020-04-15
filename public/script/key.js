@@ -8,7 +8,6 @@ class gold_key{
     display(){
 
         if (this.displayed && !this.picked) {
-            console.log(this.pos[0], this.pos[1]);
             image(keyImg, this.pos[0] * this.world.cell_canvas_size + this.world.cell_canvas_size/4, 
                 this.pos[1] * this.world.cell_canvas_size + this.world.cell_canvas_size/4, 
                 this.world.cell_canvas_size/2, this.world.cell_canvas_size/2);

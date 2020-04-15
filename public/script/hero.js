@@ -61,11 +61,10 @@ class hero{
 
     //keyPressed() function
     turnLeft(){
+        this.facingDirection = DIRECTION.LEFT;
         if (this.DIRECTION === DIRECTION.LEFT){
-            if(this.status === true && this.pos.x > 0){
-                this.world.cells[this.pos.y * this.world.cells.colSize + this.pos.x].hero = false;
-                this.pos.x--;
-                this.world.cells[this.pos.y * this.world.cells.colSize + this.pos.x].hero = true;
+            if(this.status === true && this.pos[0] > 0){
+                this.pos[0]--;
                 this.world.score += SCORE.STEP;
             }
         }
@@ -75,12 +74,10 @@ class hero{
     }
 
     turnRight(){
+        this.facingDirection = DIRECTION.RIGHT;
         if(this.DIRECTION === DIRECTION.RIGHT){
-            if(this.status === true && this.pos.x < this.world.cells.rowSize - 1){
-                this.world.cells[this.pos.y * this.world.cells.colSize + this.pos.x].hero = false;
-                this.pos.x++;
-                this.world.cells[this.pos.y * this.world.cells.colSize + this.pos.x].hero = true;
-
+            if(this.status === true && this.pos[0] < this.world.side_number - 1){
+                this.pos[0]++;
                 this.world.score += SCORE.STEP;
             }
         }
@@ -91,12 +88,11 @@ class hero{
     }
     
     turnUp(){
+        this.facingDirection = DIRECTION.UP;
         if(this.DIRECTION === DIRECTION.UP){
 
-            if(this.status === true && this.pos.y > 0){
-                this.world.cells[this.pos.y * this.world.cells.colSize + this.pos.x].hero = false;
-                this.pos.y--;
-                this.world.cells[this.pos.y * this.world.cells.colSize + this.pos.x].hero = true;
+            if(this.status === true && this.pos[1] > 0){
+                this.pos[1]--;
                 this.world.score += SCORE.STEP;
             }
         }
@@ -106,11 +102,10 @@ class hero{
     }
 
     turnDown(){
+        this.facingDirection = DIRECTION.DOWN;
         if(this.DIRECTION === DIRECTION.DOWN){
-            if(this.status === true && this.pos.y < this.world.cells.colSize - 1){
-                this.world.cells[this.pos.y * this.world.cells.colSize + this.pos.x].hero = false;
-                this.pos.y++;
-                this.world.cells[this.pos.y * this.world.cells.colSize + this.pos.x].hero = true;
+            if(this.status === true && this.pos[1] < this.world.side_number - 1){
+                this.pos[1]++;
                 this.world.score += SCORE.STEP;
             }
         }
@@ -227,7 +222,7 @@ class hero{
                 break;
         }
         if (this.status) {
-            image(agentLeftImg, this.pos[0] * this.world.cell_canvas_size, 
+            image(img, this.pos[0] * this.world.cell_canvas_size, 
                 this.pos[1] * this.world.cell_canvas_size, 
                 this.world.cell_canvas_size, this.world.cell_canvas_size);
         }

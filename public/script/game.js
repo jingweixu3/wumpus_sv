@@ -51,17 +51,21 @@ function loadCallback() {
 function keyPressed() {
   // console.log(keyCode);
   if (keyCode === UP_ARROW) {
+    wumpusWorld.hero.turnUp();
   }
   else if (keyCode === DOWN_ARROW) {
+    wumpusWorld.hero.turnDown();
   } 
   else if (keyCode === LEFT_ARROW) {
+    wumpusWorld.hero.turnLeft();
+
   } 
   else if (keyCode === RIGHT_ARROW) {
+    wumpusWorld.hero.turnRight();
+
   } 
   else if (keyCode == ENTER) {
   } 
-  else if (keyCode == 32) {
-  }
 }
 
 

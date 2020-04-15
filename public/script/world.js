@@ -57,7 +57,6 @@ class Wumpus_world {
             position.push(y);
             if(!mySet.has(position) && position[0] !== this.hero.pos[0] && position[1]!== this.hero.pos[1] && position[0]!== this.key.pos[0] && position[1]!== this.key.pos[1]){
                 mySet.add(position);
-                console.log(position);
                 this.pits.addingPit(new pit(position, this));
             }
         }
