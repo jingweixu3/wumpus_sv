@@ -18,47 +18,6 @@ class hero{
         }
     }
 
-    update_Cell_Displayed_Status(){
-        if(this.status === true){
-            let xpos = [0, 0, 1, -1];
-            let ypos = [1, -1, 0, 0];
-            let curCellPos = this.pos.y * this.world.cells.colSize + this.pos.x;
-            let ghostFlag = false;
-            let pitFlag = false;
-            //check 
-            for(let i = 0; i < xpos.length; i++){
-                if(this.pos.x + xpos[i] < this.world.cells.colSize && this.pos.x + xpos[i] >=0 &&
-                    this.pos.y + ypos[i] < this.world.cells.rowSize && this.pos.y + ypos[i] >=0){
-                    let cellPos = (this.pos.y + ypos[i]) * this.world.cells.colSize + this.pos.x + xpos[i];
-                    if(this.cells[cellPos].status === CELLSTATUS.BOTH){
-                        this.cells[curCellPos].displayed = this.cells[cellPos].status;
-                        break;
-                    }
-                    else if(this.cells[cellPos].status === CELLSTATUS.GHOST){
-                        ghostFlag = true;
-                    }
-                    else if(this.cells[cellPos].status === CELLSTATUS.PIT){
-                        pitFlag = true;
-                    }
-                }
-            }
-            if(this.cells[curCellPos].displayed === null){
-                if(ghostFlag && pitFlag){
-                    this.cells[curCellPos].displayed = CELLSTATUS.BOTH;
-                }
-                else if (ghostFlag){
-                    this.cells[curCellPos].displayed = CELLSTATUS.GHOST;
-                }
-                else if (pitFlag){
-                    this.cells[curCellPos].displayed = CELLSTATUS.PIT;
-                }
-                else{
-                    this.cells[curCellPos].displayed = this.cells[curCellPos].status;
-                }
-            }
-        }
-    }
-
     //keyPressed() function
     turnLeft(){
         this.facingDirection = DIRECTION.LEFT;
@@ -115,92 +74,32 @@ class hero{
     }
 
     shoot(){
-        let cellPos;
-        let cellPrevStatus;
-        if(this.shootChance > 0 && this.status === true && this.facingDirection === DIRECTION.UP){
-            if(this.pos.y - 1 >= 0){
-                cellPos = (this.pos.y - 1) * this.world.cells.colSize + this.pos.x;
-                cellPrevStatus = this.world.cells[cellPos].status;
-                if(this.world.cells[cellPos].status === CELLSTATUS.GHOST){
-                    this.world.cells[cellPos].status = CELLSTATUS.CLEAR;
-                }
-                else if(this.world.cells[cellPos].status === CELLSTATUS.BOTH){
-                    this.world.cells[cellPos].status = CELLSTATUS.PIT;
-                }
-            }
-        }
-        else if(this.shootChance > 0 && this.status === true && this.facingDirection === DIRECTION.DOWN){
-            if(this.pos.y + 1 < this.cells.rowSize ){
-                cellPos = (this.pos.y + 1) * this.world.cells.colSize + this.pos.x;
-                cellPrevStatus = this.world.cells[cellPos].status;
-                if(this.world.cells[cellPos].status === CELLSTATUS.GHOST){
-                    this.world.cells[cellPos].status = CELLSTATUS.CLEAR;
-                }
-                else if(this.world.cells[cellPos].status === CELLSTATUS.BOTH){
-                    this.world.cells[cellPos].status = CELLSTATUS.PIT;
-                }
-            }
-        }
-        else if(this.shootChance > 0 && this.status === true && this.facingDirection === DIRECTION.RIGHT){
-            if(this.pos.x + 1 < this.cells.colSize ){
-                cellPos = this.pos.y * this.world.cells.colSize + this.pos.x + 1;
-                cellPrevStatus = this.world.cells[cellPos].status;
-                if(this.world.cells[cellPos].status === CELLSTATUS.GHOST){
-                    this.world.cells[cellPos].status = CELLSTATUS.CLEAR;
-                }
-                else if(this.world.cells[cellPos].status === CELLSTATUS.BOTH){
-                    this.world.cells[cellPos].status = CELLSTATUS.PIT
-                }
-            }
-        }
-        else if(this.shootChance > 0 && this.status === true && this.facingDirection === DIRECTION.LEFT){
-            if(this.pos.x - 1 >= 0){
-                cellPos = this.pos.y * this.world.cells.colSize + this.pos.x - 1;
-                cellPrevStatus = this.world.cells[cellPos].status;
-                if(this.world.cells[cellPos].status === CELLSTATUS.GHOST){
-                    this.world.cells[cellPos].status = CELLSTATUS.CLEAR;
-                }
-                else if(this.world.cells[cellPos].status === CELLSTATUS.BOTH){
-                    this.world.cells[cellPos].status = CELLSTATUS.PIT
-                }
-            }
-        }
-        this.shootChance--;
-    // update displayed cell around this cell if successfully shoot ghost
-        let xpos = [0, 0, 1, -1];
-        let ypos = [1, -1, 0, 0];
+        if(this.status && this.shootChance === 1){
+            let ghost_x = this.pos[0];
+            let ghost_y = this.pos[1];
 
-        if(cellPrevStatus === CELLSTATUS.GHOST){
-            for(let i = 0; i < xpos.length; i++){
-                if(this.pos.x + xpos[i] < this.world.cells.colSize && this.pos.x + xpos[i] >=0 &&
-                    this.pos.y + ypos[i] < this.world.cells.rowSize && this.pos.y + ypos[i] >=0){
-                    let aroundCellPos = (this.pos.y + ypos[i]) * this.world.cells.colSize + this.pos.x + xpos[i];
-                        this.world.cells[aroundCellPos].displayed = CELLSTATUS.CLEAR;
-                }
+            this.shootChance--;
+            if(this.facingDirection === DIRECTION.UP){
+                ghost_y--;
             }
-        }
-        else if (cellPrevStatus === CELLSTATUS.BOTH){
-            for(let i = 0; i < xpos.length; i++){
-                if(this.pos.x + xpos[i] < this.world.cells.colSize && this.pos.x + xpos[i] >=0 &&
-                    this.pos.y + ypos[i] < this.world.cells.rowSize && this.pos.y + ypos[i] >=0){
-                    let aroundCellPos = (this.pos.y + ypos[i]) * this.world.cells.colSize + this.pos.x + xpos[i];
-                    this.world.cells[aroundCellPos].displayed = CELLSTATUS.PIT;
-                }
+            else if (this.facingDirection === DIRECTION.DOWN){
+                ghost_y++;
             }
-        }
+            else if (this.facingDirection === DIRECTION.RIGHT){
+                ghost_x++;
+            }
+            else if (this.facingDirection === DIRECTION.LEFT){
+                ghost_x--;
+            }
 
+            if(ghost_x === this.world.ghost.pos[0] && ghost_y === this.world.ghost.pos[1]){
+                this.world.ghost.killed = true; 
+            }
+        }
     }
 
     pickUpGoldKey(){
-        if(this.status === true && this.world.key.pos.x === this.pos.x && 
-            this.world.key.pos.y === this.pos.y && 
-            this.world.key.picked === false && 
-            this.world.key.displayed === true){
 
-            this.world.score += SCORE.GOLD;  
-            this.world.key.picked = true;
-            this.world.key.displayed = false;
-        }
     }
 
 

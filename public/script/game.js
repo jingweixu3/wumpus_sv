@@ -65,6 +65,7 @@ function keyPressed() {
 
   } 
   else if (keyCode == ENTER) {
+    wumpusWorld.hero.shoot();
   } 
 }
 
