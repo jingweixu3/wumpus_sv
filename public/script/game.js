@@ -64,9 +64,16 @@ function keyPressed() {
     wumpusWorld.hero.turnRight();
 
   } 
-  else if (keyCode == ENTER) {
+  //shoot
+  else if (keyCode === ENTER) {
     wumpusWorld.hero.shoot();
   } 
+
+  // pick up key
+  else if (keyCode === 32){
+    console.log("hero pick");
+    wumpusWorld.hero.pickUpGoldKey();
+  }
 }
 
 

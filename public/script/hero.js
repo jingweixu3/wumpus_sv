@@ -99,7 +99,12 @@ class hero{
     }
 
     pickUpGoldKey(){
-
+        console.log("picking");
+        if(this.status && !this.world.key.picked && this.pos[0] === this.world.key.pos[0] && this.pos[1] === this.world.key.pos[1]){
+            console.log("picked");
+            this.world.key.picked = true;
+            this.world.score += SCORE.GOLD;
+        }
     }
 
 
