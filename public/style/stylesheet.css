@@ -1,0 +1,58 @@
+body{
+    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(/img/background.jpg);
+    height: 25vh;
+    background-size: cover;
+    background-position: center;
+    justify-content: center;
+}
+
+.welcome{
+    text-align: center;
+    box-sizing:  border-box;
+    font-family: "Roboto", sans-serif;
+    position: center;
+    font-size: 60px;
+    color: coral;
+    margin: auto;
+    padding: 2% 0 0;
+}
+
+.welcome-page{
+    position: center;
+    width: 360px;
+    padding: 5% 0 0;
+    margin: auto;
+}
+
+.form{
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(rgba(245, 244, 244, 0.8),rgba(145, 142, 142, 0.8)),#ffffff;
+    max-width: 360px;
+    margin: 0 auto 100px;
+    padding: 20px;
+    text-align: center;
+}
+
+.form input[type = button]{
+    position: relative;
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #4CAF50;
+    width: 100%;
+    border: 0;
+    margin: 15px 0 15px 0;
+    padding: 15px;
+    color: #ffffff;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.form input[type = button]:hover, .form input[type = button]:active{
+    background: rgb(58, 139, 62);
+}
+
+.form button a{
+    text-decoration: none;
+}
