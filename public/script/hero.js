@@ -15,6 +15,7 @@ class hero{
                 console.log("dead in ghost");
                 this.facingDirection = DIRECTION.DEAD;
                 this.status = false;
+                this.world.ghost.displayed = true;
             }
 
         // check pit
@@ -28,6 +29,14 @@ class hero{
             }
         }
 
+        if(!this.status){
+            for (let cell of this.world.cells.cellsArray){
+                console.log("displayed!");
+                cell.displayed = true;
+            }
+            this.world.key.displayed = true;
+            this.world.ghost.displayed = true;
+        }
 
     }
 
@@ -44,6 +53,10 @@ class hero{
             this.DIRECTION = DIRECTION.LEFT;
         }
         this.alive();
+        this.world.cells.cellsArray[this.pos[1] * this.world.side_number + this.pos[0]].displayed = true;
+        if(this.status && !this.world.key.picked && this.pos[0] === this.world.key.pos[0] && this.pos[1] === this.world.key.pos[1]){
+            this.world.key.displayed = true;
+        }
     }
 
     turnRight(){
@@ -58,6 +71,11 @@ class hero{
             this.DIRECTION = DIRECTION.RIGHT;
         }
         this.alive();
+        this.world.cells.cellsArray[this.pos[1] * this.world.side_number + this.pos[0]].displayed = true;
+
+        if(this.status && !this.world.key.picked && this.pos[0] === this.world.key.pos[0] && this.pos[1] === this.world.key.pos[1]){
+            this.world.key.displayed = true;
+        }
 
     }
     
@@ -74,6 +92,11 @@ class hero{
             this.DIRECTION = DIRECTION.UP;
         }
         this.alive();
+        this.world.cells.cellsArray[this.pos[1] * this.world.side_number + this.pos[0]].displayed = true;
+        if(this.status && !this.world.key.picked && this.pos[0] === this.world.key.pos[0] && this.pos[1] === this.world.key.pos[1]){
+            this.world.key.displayed = true;
+        }
+
     }
 
     turnDown(){
@@ -88,6 +111,11 @@ class hero{
             this.DIRECTION = DIRECTION.DOWN;
         }
         this.alive();
+        this.world.cells.cellsArray[this.pos[1] * this.world.side_number + this.pos[0]].displayed = true;
+        if(this.status && !this.world.key.picked && this.pos[0] === this.world.key.pos[0] && this.pos[1] === this.world.key.pos[1]){
+            this.world.key.displayed = true;
+        }
+
     }
 
     shoot(){
@@ -119,6 +147,7 @@ class hero{
         if(this.status && !this.world.key.picked && this.pos[0] === this.world.key.pos[0] && this.pos[1] === this.world.key.pos[1]){
             this.world.key.picked = true;
             this.world.score += SCORE.GOLD;
+            this.world.key.displayed = false;
         }
     }
 

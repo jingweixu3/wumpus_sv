@@ -23,7 +23,7 @@ class Wumpus_world {
             }
         }
         this.hero = new hero([0,0], this);
-
+        this.cells.cellsArray[0].displayed = true;
         //ghost
         let ghost_x = Math.floor(Math.random() * this.side_number);
         let ghost_y = Math.floor(Math.random() * this.side_number);

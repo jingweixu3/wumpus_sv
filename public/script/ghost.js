@@ -2,7 +2,7 @@ class ghost{
     constructor(pos, wolrd){
         this.world = wolrd;
         this.pos = pos;
-        this.displayed = true;
+        this.displayed = false;
         this.killed = false; 
     }
     display(){

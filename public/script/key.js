@@ -2,7 +2,7 @@ class gold_key{
     constructor(pos, wolrd){
         this.world = wolrd;
         this.pos = pos;
-        this.displayed = true;
+        this.displayed = false;
         this.picked = false; 
     }
     display(){
