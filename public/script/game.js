@@ -1,9 +1,9 @@
 
 
 
-var filesToLoad = 12;
+var filesToLoad = 13;
 var loadCounter = 0;
-var canvas_size = 800;
+var canvas_size = 600;
 var agentRightImg;
 var agentLeftImg;
 var agentUpImg;
@@ -14,10 +14,11 @@ var ground_pit_Img;
 var ground_pit_ghost_img;
 var ground_ghost_img;
 var ghostImg;
+var ghostDeadImg;
 var keyImg;
 var pitImg;
 var wumpusWorld;
-var side_number = 8;
+var side_number = 5;
 
 function loadAssets(callback){
   agentRightImg = loadImage('/img/agentRight.png',callback);
@@ -25,13 +26,15 @@ function loadAssets(callback){
   agentUpImg = loadImage('/img/agentUp.png',callback);
   agentDownImg = loadImage('/img/agentDown.png',callback);
   agentDeadImg = loadImage('/img/agentDead.png',callback);
-  ground_Img = loadImage('/img/ground.jpg',callback);
+  ground_Img = loadImage('/img/ground.png',callback);
   ground_pit_Img = loadImage('/img/pit_ground.jpg',callback);
   ground_pit_ghost_img = loadImage('/img/ghost_pit_ground.jpg',callback);
   ground_ghost_img = loadImage('/img/ghost_ground.jpg',callback);
   ghostImg = loadImage('/img/ghost.png',callback);
+  ghostDeadImg = loadImage('/img/ghostDead.png',callback);
   keyImg = loadImage('/img/goldkey.png',callback);
   pitImg = loadImage('/img/pit.jpg',callback);
+
 }
 
 function setup() {

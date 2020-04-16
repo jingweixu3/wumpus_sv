@@ -65,7 +65,6 @@ class Wumpus_world {
 
 
     initialize_cell_status(){
-        console.log("Update cell");
         // update cell around ghost
         let xpos = [-1,1,0,0];
         let ypos = [0,0,1,-1];
@@ -86,7 +85,6 @@ class Wumpus_world {
             for (let i = 0; i < xpos.length; i++){
                 let cell_xpos = pit.pos[0] + xpos[i];
                 let cell_ypos = pit.pos[1] + ypos[i];
-                console.log("pit: " +cell_xpos + " " + cell_ypos);
 
                 if(cell_xpos >=0 && cell_xpos < this.side_number && 
                     cell_ypos >=0 && cell_ypos < this.side_number &&
@@ -95,7 +93,6 @@ class Wumpus_world {
                             this.cells.cellsArray[cell_ypos * this.side_number + cell_xpos].status = CELLSTATUS.BOTH;
                         }
                         else{
-                            console.log("!!!");
                             this.cells.cellsArray[cell_ypos * this.side_number + cell_xpos].status = CELLSTATUS.GROUND_PIT;
                         }
                         
@@ -107,9 +104,11 @@ class Wumpus_world {
     display(){
         this.cells.display();
         // this.pits.display();
-        this.key.display();
-        this.ghost.display();
         this.hero.display();
+        this.ghost.display();
+        this.key.display();
+
+
     }
 }
 

@@ -12,7 +12,6 @@ class hero{
         if(this.status){
         // check ghost
             if(!this.world.ghost.killed && this.pos[0] === this.world.ghost.pos[0] && this.pos[1] === this.world.ghost.pos[1]){
-                console.log("dead in ghost");
                 this.facingDirection = DIRECTION.DEAD;
                 this.status = false;
                 this.world.ghost.displayed = true;
@@ -21,7 +20,6 @@ class hero{
         // check pit
             for(let p of this.world.pits.pitsArray){
                 if(p.pos[0] === this.pos[0] && p.pos[1] === this.pos[1]){
-                    console.log("dead in pit");
                     this.status = false;
                     this.facingDirection = DIRECTION.DEAD;
                     break;
@@ -31,7 +29,6 @@ class hero{
 
         if(!this.status){
             for (let cell of this.world.cells.cellsArray){
-                console.log("displayed!");
                 cell.displayed = true;
             }
             this.world.key.displayed = true;

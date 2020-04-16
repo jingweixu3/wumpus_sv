@@ -8,7 +8,7 @@ class cell{
     }
 
     display(){
-        strokeWeight(10);
+        strokeWeight(5);
         stroke(30);
         if (this.displayed) {
             let img;
@@ -36,7 +36,7 @@ class cell{
 
         } 
         else {
-            fill(100);
+            fill(51);
             square(this.pos[0] * this.cell_canvas_size, this.pos[1] * this.cell_canvas_size, this.cell_canvas_size);
         }
     }
