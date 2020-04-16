@@ -65,10 +65,10 @@ class Wumpus_world {
 
 
     initialize_cell_status(){
-        // update cell around ghost
         let xpos = [-1,1,0,0];
         let ypos = [0,0,1,-1];
 
+        // update cell around ghost
         for (let i = 0; i < xpos.length; i++){
             let cell_xpos = this.ghost.pos[0] + xpos[i];
             let cell_ypos = this.ghost.pos[1] + ypos[i];
@@ -87,8 +87,7 @@ class Wumpus_world {
                 let cell_ypos = pit.pos[1] + ypos[i];
 
                 if(cell_xpos >=0 && cell_xpos < this.side_number && 
-                    cell_ypos >=0 && cell_ypos < this.side_number &&
-                    this.cells.cellsArray[cell_ypos * this.side_number + cell_xpos].status === CELLSTATUS.CLEAR){
+                    cell_ypos >=0 && cell_ypos < this.side_number){
                         if(this.cells.cellsArray[cell_ypos * this.side_number + cell_xpos].status === CELLSTATUS.GHOST){
                             this.cells.cellsArray[cell_ypos * this.side_number + cell_xpos].status = CELLSTATUS.BOTH;
                         }
@@ -103,12 +102,9 @@ class Wumpus_world {
 
     display(){
         this.cells.display();
-        // this.pits.display();
         this.hero.display();
         this.ghost.display();
         this.key.display();
-
-
     }
 }
 

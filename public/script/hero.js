@@ -137,6 +137,24 @@ class hero{
             if(ghost_x === this.world.ghost.pos[0] && ghost_y === this.world.ghost.pos[1]){
                 this.world.ghost.killed = true; 
                 this.world.cells.cellsArray[ghost_x + ghost_y * this.world.side_number].displayed = true;
+                // update cell around ghost
+                let xpos = [-1,1,0,0];
+                let ypos = [0,0,1,-1];
+                for (let i = 0; i < xpos.length; i++){
+                    let cell_xpos = this.world.ghost.pos[0] + xpos[i];
+                    let cell_ypos = this.world.ghost.pos[1] + ypos[i];
+                    
+                    if(cell_xpos >=0 && cell_xpos < this.world.side_number && 
+                        cell_ypos >=0 && cell_ypos < this.world.side_number){
+                            
+                            if(this.world.cells.cellsArray[cell_ypos * this.world.side_number + cell_xpos].status === CELLSTATUS.GHOST){
+                                this.world.cells.cellsArray[cell_ypos * this.world.side_number + cell_xpos].status = CELLSTATUS.CLEAR;
+                            }
+                            else if(this.world.cells.cellsArray[cell_ypos * this.world.side_number + cell_xpos].status === CELLSTATUS.BOTH){
+                                this.world.cells.cellsArray[cell_ypos * this.world.side_number + cell_xpos].status = CELLSTATUS.GROUND_PIT;
+                            }
+                    }
+                }
             }
         }
     }

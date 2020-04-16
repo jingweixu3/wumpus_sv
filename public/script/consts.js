@@ -14,10 +14,10 @@ const CELL_SIZE = {
 //cell status for img and hero use
 const CELLSTATUS = {
     CLEAR: 0,
-    PIT: 1,
-    GHOST: 2,
-    BOTH: 3, 
-    GROUND_PIT: 4 //both pit and ghost
+    PIT: 1,   // real pit display
+    GHOST: 2, //hint usage
+    BOTH: 3, //both pit and ghost ---> hint usage
+    GROUND_PIT: 4 //--->hint usage
 }
 
 const SCORE = {
