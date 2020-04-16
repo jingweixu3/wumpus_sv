@@ -71,7 +71,6 @@ function keyPressed() {
 
   // pick up key
   else if (keyCode === 32){
-    console.log("hero pick");
     wumpusWorld.hero.pickUpGoldKey();
   }
 }

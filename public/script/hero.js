@@ -8,14 +8,27 @@ class hero{
     }
 
     //draw() function
-    killed(){
-        let cells = this.world.cells;
-        let cellPos = this.pos.y * cells.colSize + this.pos.x;
-        if(cells[cellPos].status === CELLSTATUS.PIT || cells[cellPos].status === CELLSTATUS.GHOST || cells[cellPos].status === CELLSTATUS.BOTH){
-            this.status = false;
-            this.world.status +=SCORE.DEAD;
-            this.cells[cellPos].displayed = this.cells[cellPos].status;
+    alive(){
+        if(this.status){
+        // check ghost
+            if(!this.world.ghost.killed && this.pos[0] === this.world.ghost.pos[0] && this.pos[1] === this.world.ghost.pos[1]){
+                console.log("dead in ghost");
+                this.facingDirection = DIRECTION.DEAD;
+                this.status = false;
+            }
+
+        // check pit
+            for(let p of this.world.pits.pitsArray){
+                if(p.pos[0] === this.pos[0] && p.pos[1] === this.pos[1]){
+                    console.log("dead in pit");
+                    this.status = false;
+                    this.facingDirection = DIRECTION.DEAD;
+                    break;
+                }
+            }
         }
+
+
     }
 
     //keyPressed() function
@@ -30,6 +43,7 @@ class hero{
         else{
             this.DIRECTION = DIRECTION.LEFT;
         }
+        this.alive();
     }
 
     turnRight(){
@@ -43,6 +57,7 @@ class hero{
         else{
             this.DIRECTION = DIRECTION.RIGHT;
         }
+        this.alive();
 
     }
     
@@ -58,6 +73,7 @@ class hero{
         else{
             this.DIRECTION = DIRECTION.UP;
         }
+        this.alive();
     }
 
     turnDown(){
@@ -71,6 +87,7 @@ class hero{
         else{
             this.DIRECTION = DIRECTION.DOWN;
         }
+        this.alive();
     }
 
     shoot(){
@@ -99,9 +116,7 @@ class hero{
     }
 
     pickUpGoldKey(){
-        console.log("picking");
         if(this.status && !this.world.key.picked && this.pos[0] === this.world.key.pos[0] && this.pos[1] === this.world.key.pos[1]){
-            console.log("picked");
             this.world.key.picked = true;
             this.world.score += SCORE.GOLD;
         }
@@ -124,12 +139,14 @@ class hero{
             case DIRECTION.UP:
                 img = agentUpImg;
                 break;
+            case DIRECTION.DEAD:
+                img = agentDeadImg;
         }
-        if (this.status) {
-            image(img, this.pos[0] * this.world.cell_canvas_size, 
-                this.pos[1] * this.world.cell_canvas_size, 
-                this.world.cell_canvas_size, this.world.cell_canvas_size);
-        }
+
+        image(img, this.pos[0] * this.world.cell_canvas_size, 
+            this.pos[1] * this.world.cell_canvas_size, 
+            this.world.cell_canvas_size, this.world.cell_canvas_size);
+
     }
 
 }

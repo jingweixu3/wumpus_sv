@@ -2,12 +2,12 @@ class cell{
     constructor(status, pos, cell_canvas_size){
         this.displayed = CELLSTATUS.CLEAR;  //displayed or not displayed
         this.status = status;   // cell real status: empty cell, pit, ghost
-        this.position = pos;         // position in the matrix
+        this.pos = pos;         // pos in the matrix
         this.cell_canvas_size = cell_canvas_size;   //cell size on the canvas
     }
 
     display(){
-        strokeWeight(2);
+        strokeWeight(10);
         stroke(30);
         if (this.displayed !== null) {
             let img;
@@ -26,14 +26,14 @@ class cell{
                     break;
             }
 
-            image(img, this.position[0] * this.cell_canvas_size, this.position[1] * this.cell_canvas_size, this.cell_canvas_size, this.cell_canvas_size);
+            image(img, this.pos[0] * this.cell_canvas_size, this.pos[1] * this.cell_canvas_size, this.cell_canvas_size, this.cell_canvas_size);
             noFill();
-            square(this.position[0] * this.cell_canvas_size, this.position[1] * this.cell_canvas_size, this.cell_canvas_size);
+            square(this.pos[0] * this.cell_canvas_size, this.pos[1] * this.cell_canvas_size, this.cell_canvas_size);
 
         } 
         else {
             fill(100);
-            square(this.position[0] * this.cell_canvas_size, this.position[1] * this.cell_canvas_size, this.cell_canvas_size);
+            square(this.pos[0] * this.cell_canvas_size, this.pos[1] * this.cell_canvas_size, this.cell_canvas_size);
         }
     }
 }

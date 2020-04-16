@@ -1,16 +1,16 @@
 class pits{
     constructor(world){
         this.world = world;
-        this.pits = new Array();
+        this.pitsArray = new Array();
     }
 
     addingPit(pit){
-        this.pits.push(pit);
+        this.pitsArray.push(pit);
     }
 
     display(){
-        for(let i = 0; i < this.pits.length; i++){
-            this.pits[i].display();
+        for(let i = 0; i < this.pitsArray.length; i++){
+            this.pitsArray[i].display();
         }
     }
 }
