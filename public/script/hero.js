@@ -139,6 +139,7 @@ class hero{
 
             if(ghost_x === this.world.ghost.pos[0] && ghost_y === this.world.ghost.pos[1]){
                 this.world.ghost.killed = true; 
+                this.world.cells.cellsArray[ghost_x + ghost_y * this.world.side_number].displayed = true;
             }
         }
     }
