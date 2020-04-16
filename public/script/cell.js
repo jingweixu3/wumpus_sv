@@ -1,7 +1,8 @@
 class cell{
-    constructor(status, pos, cell_canvas_size){
-        this.displayed = CELLSTATUS.CLEAR;  //displayed or not displayed
-        this.status = status;   // cell real status: empty cell, pit, ghost
+    constructor(pos, cell_canvas_size, world){
+        this.world = world
+        this.displayed = true;  //displayed or not displayed
+        this.status = CELLSTATUS.CLEAR;   // cell real status: empty cell, pit, ghost
         this.pos = pos;         // pos in the matrix
         this.cell_canvas_size = cell_canvas_size;   //cell size on the canvas
     }
@@ -9,13 +10,13 @@ class cell{
     display(){
         strokeWeight(10);
         stroke(30);
-        if (this.displayed !== null) {
+        if (this.displayed) {
             let img;
-            switch (this.displayed) {
-                case CELLSTATUS.CLEAR:
-                    img = ground_Img;
-                    break;
+            switch (this.status) {
                 case CELLSTATUS.PIT:
+                    img = pitImg;
+                    break;
+                case CELLSTATUS.GROUND_PIT:
                     img = ground_pit_Img;
                     break;
                 case CELLSTATUS.GHOST:
@@ -23,6 +24,9 @@ class cell{
                     break;
                 case CELLSTATUS.BOTH:
                     img = ground_pit_ghost_img;
+                    break;
+                default:               
+                    img = ground_Img;
                     break;
             }
 

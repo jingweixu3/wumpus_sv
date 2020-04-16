@@ -16,7 +16,8 @@ const CELLSTATUS = {
     CLEAR: 0,
     PIT: 1,
     GHOST: 2,
-    BOTH: 3,  //both pit and ghost
+    BOTH: 3, 
+    GROUND_PIT: 4 //both pit and ghost
 }
 
 const SCORE = {

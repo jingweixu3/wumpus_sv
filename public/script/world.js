@@ -13,17 +13,16 @@ class Wumpus_world {
     }
 
     world_Setup(){
-
         //hero
-        this.hero = new hero([0,0], this);
 
         //cells
         this.cells = new cells(this);
         for(let y = 0; y < this.side_number; y++){
             for(let x = 0; x < this.side_number; x++){
-                this.cells.addingCell(new cell(CELLSTATUS.CLEAR, [x,y], this.cell_canvas_size));
+                this.cells.addingCell(new cell([x,y], this.cell_canvas_size, this));
             }
         }
+        this.hero = new hero([0,0], this);
 
         //ghost
         let ghost_x = Math.floor(Math.random() * this.side_number);
@@ -36,7 +35,6 @@ class Wumpus_world {
 
 
         //key
-
         let key_x = Math.floor(Math.random() * this.side_number);
         let key_y = Math.floor(Math.random() * this.side_number);
         while(key_x === this.hero.pos[0] && key_y === this.hero.pos[1] && key_x === this.ghost.pos[0] && key_y === this.ghost.pos[1]){
@@ -45,9 +43,10 @@ class Wumpus_world {
         }
         this.key = new gold_key([key_x, key_y], this);
 
+
         //pits
         this.pits = new pits(this);
-        let pits_number = Math.floor(0.2 * this.cells_size);
+        let pits_number = Math.floor(0.1 * this.cells_size);
         let mySet = new Set();
         while(mySet.size < pits_number){
             let x = Math.floor(Math.random() * this.side_number);
@@ -58,14 +57,56 @@ class Wumpus_world {
             if(!mySet.has(position) && position[0] !== this.hero.pos[0] && position[1]!== this.hero.pos[1] && position[0]!== this.key.pos[0] && position[1]!== this.key.pos[1]){
                 mySet.add(position);
                 this.pits.addingPit(new pit(position, this));
+                this.cells.cellsArray[y*this.side_number + x].status = CELLSTATUS.PIT;
             }
         }
         console.log("finish setting up");
     }
 
+
+    initialize_cell_status(){
+        console.log("Update cell");
+        // update cell around ghost
+        let xpos = [-1,1,0,0];
+        let ypos = [0,0,1,-1];
+
+        for (let i = 0; i < xpos.length; i++){
+            let cell_xpos = this.ghost.pos[0] + xpos[i];
+            let cell_ypos = this.ghost.pos[1] + ypos[i];
+            if(cell_xpos >=0 && cell_xpos < this.side_number && 
+                cell_ypos >=0 && cell_ypos < this.side_number  && 
+                this.cells.cellsArray[cell_ypos * this.side_number + cell_xpos].status === CELLSTATUS.CLEAR){
+                    this.cells.cellsArray[cell_ypos * this.side_number + cell_xpos].status = CELLSTATUS.GHOST;
+                }
+        }
+
+
+        // update cell around pit
+        for (let pit of this.pits.pitsArray){
+            for (let i = 0; i < xpos.length; i++){
+                let cell_xpos = pit.pos[0] + xpos[i];
+                let cell_ypos = pit.pos[1] + ypos[i];
+                console.log("pit: " +cell_xpos + " " + cell_ypos);
+
+                if(cell_xpos >=0 && cell_xpos < this.side_number && 
+                    cell_ypos >=0 && cell_ypos < this.side_number &&
+                    this.cells.cellsArray[cell_ypos * this.side_number + cell_xpos].status === CELLSTATUS.CLEAR){
+                        if(this.cells.cellsArray[cell_ypos * this.side_number + cell_xpos].status === CELLSTATUS.GHOST){
+                            this.cells.cellsArray[cell_ypos * this.side_number + cell_xpos].status = CELLSTATUS.BOTH;
+                        }
+                        else{
+                            console.log("!!!");
+                            this.cells.cellsArray[cell_ypos * this.side_number + cell_xpos].status = CELLSTATUS.GROUND_PIT;
+                        }
+                        
+                    }
+            }
+        }
+    }
+
     display(){
         this.cells.display();
-        this.pits.display();
+        // this.pits.display();
         this.key.display();
         this.ghost.display();
         this.hero.display();

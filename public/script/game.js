@@ -39,6 +39,7 @@ function setup() {
   canvas.parent("wumpus");
   loadAssets(loadCallback);
   wumpusWorld = new Wumpus_world(side_number);
+  wumpusWorld.initialize_cell_status();
 }
 
 function loadCallback() {
