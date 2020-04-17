@@ -1,5 +1,5 @@
 body{
-    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(/img/background.jpg);
+    /*background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(/img/background.jpg);*/
     height: 25vh;
     background-size: cover;
     background-position: center;
@@ -55,4 +55,16 @@ body{
 
 .form button a{
     text-decoration: none;
+}
+
+.container{
+    width: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 30px auto 0px auto;
+}
+.score h2{
+    color: pink;
+    font-size: 14px;
 }

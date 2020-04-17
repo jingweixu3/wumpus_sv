@@ -39,80 +39,83 @@ class hero{
 
     //keyPressed() function
     turnLeft(){
-        this.facingDirection = DIRECTION.LEFT;
-        if (this.DIRECTION === DIRECTION.LEFT){
-            if(this.status === true && this.pos[0] > 0){
-                this.pos[0]--;
-                this.world.score += SCORE.STEP;
+        if(this.status){
+            if (this.facingDirection === DIRECTION.LEFT){
+                if(this.status === true && this.pos[0] > 0){
+                    this.pos[0]--;
+                    this.world.score += SCORE.STEP;
+                }
             }
-        }
-        else{
-            this.DIRECTION = DIRECTION.LEFT;
-        }
-        this.alive();
-        this.world.cells.cellsArray[this.pos[1] * this.world.side_number + this.pos[0]].displayed = true;
-        if(this.status && !this.world.key.picked && this.pos[0] === this.world.key.pos[0] && this.pos[1] === this.world.key.pos[1]){
-            this.world.key.displayed = true;
+            else{
+                this.facingDirection = DIRECTION.LEFT;
+            }
+            this.alive();
+            this.world.cells.cellsArray[this.pos[1] * this.world.side_number + this.pos[0]].displayed = true;
+            if(this.status && !this.world.key.picked && this.pos[0] === this.world.key.pos[0] && this.pos[1] === this.world.key.pos[1]){
+                this.world.key.displayed = true;
+            }
         }
     }
 
     turnRight(){
-        this.facingDirection = DIRECTION.RIGHT;
-        if(this.DIRECTION === DIRECTION.RIGHT){
-            if(this.status === true && this.pos[0] < this.world.side_number - 1){
-                this.pos[0]++;
-                this.world.score += SCORE.STEP;
+        if(this.status){
+            if(this.facingDirection === DIRECTION.RIGHT){
+                if(this.status === true && this.pos[0] < this.world.side_number - 1){
+                    this.pos[0]++;
+                    this.world.score += SCORE.STEP;
+                }
+            }
+            else{
+                this.facingDirection = DIRECTION.RIGHT;
+            }
+            this.alive();
+            this.world.cells.cellsArray[this.pos[1] * this.world.side_number + this.pos[0]].displayed = true;
+    
+            if(this.status && !this.world.key.picked && this.pos[0] === this.world.key.pos[0] && this.pos[1] === this.world.key.pos[1]){
+                this.world.key.displayed = true;
             }
         }
-        else{
-            this.DIRECTION = DIRECTION.RIGHT;
-        }
-        this.alive();
-        this.world.cells.cellsArray[this.pos[1] * this.world.side_number + this.pos[0]].displayed = true;
-
-        if(this.status && !this.world.key.picked && this.pos[0] === this.world.key.pos[0] && this.pos[1] === this.world.key.pos[1]){
-            this.world.key.displayed = true;
-        }
-
     }
     
     turnUp(){
-        this.facingDirection = DIRECTION.UP;
-        if(this.DIRECTION === DIRECTION.UP){
+        if(this.status){
 
-            if(this.status === true && this.pos[1] > 0){
-                this.pos[1]--;
-                this.world.score += SCORE.STEP;
+            if(this.facingDirection === DIRECTION.UP){
+
+                if(this.status === true && this.pos[1] > 0){
+                    this.pos[1]--;
+                    this.world.score += SCORE.STEP;
+                }
             }
-        }
-        else{
-            this.DIRECTION = DIRECTION.UP;
-        }
-        this.alive();
-        this.world.cells.cellsArray[this.pos[1] * this.world.side_number + this.pos[0]].displayed = true;
-        if(this.status && !this.world.key.picked && this.pos[0] === this.world.key.pos[0] && this.pos[1] === this.world.key.pos[1]){
-            this.world.key.displayed = true;
+            else{
+                this.facingDirection = DIRECTION.UP;
+            }
+            this.alive();
+            this.world.cells.cellsArray[this.pos[1] * this.world.side_number + this.pos[0]].displayed = true;
+            if(this.status && !this.world.key.picked && this.pos[0] === this.world.key.pos[0] && this.pos[1] === this.world.key.pos[1]){
+                this.world.key.displayed = true;
+            }
         }
 
     }
 
     turnDown(){
-        this.facingDirection = DIRECTION.DOWN;
-        if(this.DIRECTION === DIRECTION.DOWN){
-            if(this.status === true && this.pos[1] < this.world.side_number - 1){
-                this.pos[1]++;
-                this.world.score += SCORE.STEP;
+        if(this.status){
+            if(this.facingDirection === DIRECTION.DOWN){
+                if(this.status === true && this.pos[1] < this.world.side_number - 1){
+                    this.pos[1]++;
+                    this.world.score += SCORE.STEP;
+                }
+            }
+            else{
+                this.facingDirection = DIRECTION.DOWN;
+            }
+            this.alive();
+            this.world.cells.cellsArray[this.pos[1] * this.world.side_number + this.pos[0]].displayed = true;
+            if(this.status && !this.world.key.picked && this.pos[0] === this.world.key.pos[0] && this.pos[1] === this.world.key.pos[1]){
+                this.world.key.displayed = true;
             }
         }
-        else{
-            this.DIRECTION = DIRECTION.DOWN;
-        }
-        this.alive();
-        this.world.cells.cellsArray[this.pos[1] * this.world.side_number + this.pos[0]].displayed = true;
-        if(this.status && !this.world.key.picked && this.pos[0] === this.world.key.pos[0] && this.pos[1] === this.world.key.pos[1]){
-            this.world.key.displayed = true;
-        }
-
     }
 
     shoot(){
@@ -167,6 +170,11 @@ class hero{
         }
     }
 
+    escape(){
+        if (this.status && this.pos[0] === 0 && this.pos[2] === 0){
+            this.world.gameOver();
+        }
+    }
 
     //display agent
     display(){

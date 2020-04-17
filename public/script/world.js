@@ -37,7 +37,7 @@ class Wumpus_world {
         //key
         let key_x = Math.floor(Math.random() * this.side_number);
         let key_y = Math.floor(Math.random() * this.side_number);
-        while(key_x === this.hero.pos[0] && key_y === this.hero.pos[1] && key_x === this.ghost.pos[0] && key_y === this.ghost.pos[1]){
+        while((key_x === this.hero.pos[0] && key_y === this.hero.pos[1]) || (key_x === this.ghost.pos[0] && key_y === this.ghost.pos[1])){
             key_x = Math.floor(Math.random() * this.side_number);
             key_y = Math.floor(Math.random() * this.side_number);
         }
@@ -91,7 +91,7 @@ class Wumpus_world {
                         if(this.cells.cellsArray[cell_ypos * this.side_number + cell_xpos].status === CELLSTATUS.GHOST){
                             this.cells.cellsArray[cell_ypos * this.side_number + cell_xpos].status = CELLSTATUS.BOTH;
                         }
-                        else{
+                        else if(this.cells.cellsArray[cell_ypos * this.side_number + cell_xpos].status === CELLSTATUS.CLEAR){
                             this.cells.cellsArray[cell_ypos * this.side_number + cell_xpos].status = CELLSTATUS.GROUND_PIT;
                         }
                         
@@ -105,6 +105,9 @@ class Wumpus_world {
         this.hero.display();
         this.ghost.display();
         this.key.display();
+    }
+    gameOver(){
+
     }
 }
 

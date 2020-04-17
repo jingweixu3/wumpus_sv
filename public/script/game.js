@@ -45,6 +45,12 @@ function setup() {
   wumpusWorld.initialize_cell_status();
 }
 
+function restart(){
+  console.log("restart");
+  wumpusWorld = new Wumpus_world(side_number);
+  wumpusWorld.initialize_cell_status();
+}
+
 function loadCallback() {
   loadCounter++;
   if (loadCounter == filesToLoad) {
@@ -72,9 +78,12 @@ function keyPressed() {
   else if (keyCode === ENTER) {
     wumpusWorld.hero.shoot();
   } 
-
+  //escape
+  else if (keyCode === 16){
+    wumpusWorld.hero.escape();
+  }
   // pick up key
-  else if (keyCode === 32){
+  else if (keyCode === 17){
     wumpusWorld.hero.pickUpGoldKey();
   }
 }
@@ -84,4 +93,6 @@ function draw() {
   background(255);
   smooth();
   wumpusWorld.display();
+  let score = document.getElementById("score");
+  score.innerHTML = wumpusWorld.score;
 }
