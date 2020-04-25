@@ -1,7 +1,7 @@
 
 
 
-var filesToLoad = 13;
+var filesToLoad = 14;
 var loadCounter = 0;
 var canvas_size = 600;
 var agentRightImg;
@@ -49,6 +49,8 @@ function restart(){
   console.log("restart");
   wumpusWorld = new Wumpus_world(side_number);
   wumpusWorld.initialize_cell_status();
+  let gameOver = document.getElementById("gameover");
+  gameOver.innerHTML = "";
 }
 
 function loadCallback() {
@@ -57,7 +59,6 @@ function loadCallback() {
       loading = false;
   }
 }
-
 function keyPressed() {
   // console.log(keyCode);
   if (keyCode === UP_ARROW) {
@@ -93,16 +94,16 @@ function draw() {
   background(255);
   smooth();
   wumpusWorld.display();
+  let gameOver = document.getElementById("gameover");
   let score = document.getElementById("score");
   score.innerHTML = "Score: " + wumpusWorld.score;
-  let gameOver = document.getElementById("gameover");
+  gameOver.innerHTML = "";
   if(wumpusWorld.gameover){
     if(wumpusWorld.hero.status){
-        gameOver.innerHTML = "You Win!\n";
+        gameOver.innerHTML = "Climb out of the Cave!\n";
     }
     else{
-      gameOver.innerHTML = "Game Over!\n";
-
+      gameOver.innerHTML = "You Died Game Over!\n";
     }
   }
 }
