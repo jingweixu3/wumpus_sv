@@ -1,7 +1,20 @@
 <html>
     <head>
         <title>Wumpus World</title>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+        </script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+        </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.sound.js"></script>
         <link rel="stylesheet" type= "text/css" href="/style/stylesheet.css">
         <script src="../script/game.js"></script>
         <script src="../script/cell.js"></script>
@@ -16,13 +29,102 @@
 
     </head>
     <body>
-        <div class = "container">        
-            <div id="wumpus"></div>
-        </div>
-        <div class="socre" ><h2 class="score" id="score"> </h2></div>
-        <duv></duv>
-            <button id="restart" type="button" class="btn btn-dark btn-lg" onclick="restart()">Restart</button>
-        </div>
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="">Wumpus World</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="navbar-item"  href="/">Home</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+            
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="" data-toggle="modal" data-target="#controlsModal">
+                    Controls
+                  </a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="" data-toggle="modal" data-target="#aboutModal">
+                    About
+                  </a>
+                </li>
+              </ul>
+            </div>
+        </nav>
+
         
+        <div class="container">
+            <div id="wumpus"></div>
+            <div class="info">
+                <div class="gameover" ><h1 class="gameover" id="gameover"> </h1></div>
+                <div class="score" ><h2 class="score" id="score"> </h2></div>
+                <button id="restart" type="button" class="btn btn-dark btn-lg" onclick="restart()">Restart</button>
+            </div>
+        </div>
+
+        
+        <!-- Controls -->
+        <div class="modal fade" id="controlsModal" tabindex="-1" role="dialog" aria-labelledby="controlsModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document"><br>
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="controlsModalLabel">Controls</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                <img src="img/controls.png" style="width:100%">
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            </div>
+        </div>
+            <!-- About -->
+        <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="aboutModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="aboutModalLabel">The Wumpus world</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                The Wumpus world is a simple world example to illustrate the worth of a knowledge-based agent and to represent
+                knowledge
+                representation. It was inspired by a video game Hunt the Wumpus by Gregory Yob in 1973. <br>
+                <br>
+                The Wumpus world is a cave which has rooms connected with passageways. We have a knowledge-based agent who
+                will go
+                forward in this world. The cave has a room with a beast which is called Wumpus, who eats anyone who enters the
+                room. The
+                Wumpus can be shot by the agent, but the agent has to find an arrow first, which spawns somewhere in the cave.
+                In the
+                Wumpus world, there are pits which are bottomless, and if the agent falls in a pit, he will be stuck there
+                forever. The
+                agent goal is to find the arrow and kill the Wumpus without falling into a pit or getting killed by the
+                Wumpus. <br>
+                In the rooms directly adjacent to a pit, the agent can perceive a breeze.
+                In the rooms directly adjacent to the wumpus, the agent can perceive a stench.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        </div>
     </body>
 </html>

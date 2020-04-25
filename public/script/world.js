@@ -10,6 +10,7 @@ class Wumpus_world {
         this.pits;
         this.score = 0;
         this.world_Setup();
+        this.gameover = false;
     }
 
     world_Setup(){
@@ -105,9 +106,6 @@ class Wumpus_world {
         this.hero.display();
         this.ghost.display();
         this.key.display();
-    }
-    gameOver(){
-
     }
 }
 

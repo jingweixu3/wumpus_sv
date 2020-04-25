@@ -1,5 +1,5 @@
 body{
-    /*background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(/img/background.jpg);*/
+    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(/img/background.jpg);
     height: 25vh;
     background-size: cover;
     background-position: center;
@@ -57,14 +57,35 @@ body{
     text-decoration: none;
 }
 
+
 .container{
     width: fit-content;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin: 30px auto 0px auto;
+    margin: 30px auto 30px auto;
 }
-.score h2{
-    color: pink;
-    font-size: 14px;
+
+.btn{
+    width: fit-content;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 30px 30px 30px 30px;
+    border: 60px;
+}
+.gameover{
+    width: fit-content;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 30px auto 0px auto;
+    color: coral;
+    font-size: 100px;
+}
+.score{
+    width: fit-content;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 30px auto 0px auto;
+    color: coral;
+    font-size: 60px;
 }

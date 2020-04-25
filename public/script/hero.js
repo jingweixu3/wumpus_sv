@@ -9,7 +9,7 @@ class hero{
 
     //draw() function
     alive(){
-        if(this.status){
+        if(!this.gameover && this.status){
         // check ghost
             if(!this.world.ghost.killed && this.pos[0] === this.world.ghost.pos[0] && this.pos[1] === this.world.ghost.pos[1]){
                 this.facingDirection = DIRECTION.DEAD;
@@ -28,6 +28,7 @@ class hero{
         }
 
         if(!this.status){
+            this.world.gameover = true;
             for (let cell of this.world.cells.cellsArray){
                 cell.displayed = true;
             }
@@ -39,7 +40,7 @@ class hero{
 
     //keyPressed() function
     turnLeft(){
-        if(this.status){
+        if(!this.gameover && this.status){
             if (this.facingDirection === DIRECTION.LEFT){
                 if(this.status === true && this.pos[0] > 0){
                     this.pos[0]--;
@@ -58,7 +59,7 @@ class hero{
     }
 
     turnRight(){
-        if(this.status){
+        if(!this.gameover && this.status){
             if(this.facingDirection === DIRECTION.RIGHT){
                 if(this.status === true && this.pos[0] < this.world.side_number - 1){
                     this.pos[0]++;
@@ -78,7 +79,7 @@ class hero{
     }
     
     turnUp(){
-        if(this.status){
+        if(!this.gameover && this.status){
 
             if(this.facingDirection === DIRECTION.UP){
 
@@ -100,7 +101,7 @@ class hero{
     }
 
     turnDown(){
-        if(this.status){
+        if(!this.gameover && this.status){
             if(this.facingDirection === DIRECTION.DOWN){
                 if(this.status === true && this.pos[1] < this.world.side_number - 1){
                     this.pos[1]++;
@@ -119,7 +120,7 @@ class hero{
     }
 
     shoot(){
-        if(this.status && this.shootChance === 1){
+        if(!this.gameover && this.status && this.shootChance === 1){
             let ghost_x = this.pos[0];
             let ghost_y = this.pos[1];
 
@@ -163,16 +164,18 @@ class hero{
     }
 
     pickUpGoldKey(){
-        if(this.status && !this.world.key.picked && this.pos[0] === this.world.key.pos[0] && this.pos[1] === this.world.key.pos[1]){
+        let flag = false;
+        if(!this.gameover && this.status && !this.world.key.picked && this.pos[0] === this.world.key.pos[0] && this.pos[1] === this.world.key.pos[1]){
             this.world.key.picked = true;
             this.world.score += SCORE.GOLD;
             this.world.key.displayed = false;
+            flag = true;
         }
-    }
-
-    escape(){
-        if (this.status && this.pos[0] === 0 && this.pos[2] === 0){
-            this.world.gameOver();
+        if(!this.gameover  && !flag && this.status && this.pos[0] == 0 && this.pos[1] == 0){
+            console.log("game over");
+            this.status = true;
+            this.alive();
+            this.world.gameover = true;
         }
     }
 

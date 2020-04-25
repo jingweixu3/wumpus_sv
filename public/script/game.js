@@ -83,7 +83,7 @@ function keyPressed() {
     wumpusWorld.hero.escape();
   }
   // pick up key
-  else if (keyCode === 17){
+  else if (keyCode === 32){
     wumpusWorld.hero.pickUpGoldKey();
   }
 }
@@ -94,5 +94,15 @@ function draw() {
   smooth();
   wumpusWorld.display();
   let score = document.getElementById("score");
-  score.innerHTML = wumpusWorld.score;
+  score.innerHTML = "Score: " + wumpusWorld.score;
+  let gameOver = document.getElementById("gameover");
+  if(wumpusWorld.gameover){
+    if(wumpusWorld.hero.status){
+        gameOver.innerHTML = "You Win!\n";
+    }
+    else{
+      gameOver.innerHTML = "Game Over!\n";
+
+    }
+  }
 }
