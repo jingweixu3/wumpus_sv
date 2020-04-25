@@ -70,22 +70,29 @@ body{
     width: fit-content;
     flex-wrap: wrap;
     justify-content: center;
-    margin: 30px 30px 30px 30px;
+    position: center;
+    margin: 30px 30px 0px 30px;
     border: 60px;
 }
 .gameover{
     width: fit-content;
     flex-wrap: wrap;
+    position: center;
     justify-content: center;
-    margin: 30px auto 0px auto;
+    margin: 30px auto 0px 30px;
     color: coral;
     font-size: 100px;
+    border: 60px;
+
 }
 .score{
     width: fit-content;
     flex-wrap: wrap;
     justify-content: center;
-    margin: 30px auto 0px auto;
+    position: center;
+    margin: 30px auto 0px 30px;
     color: coral;
     font-size: 60px;
+    border: 60px;
+
 }

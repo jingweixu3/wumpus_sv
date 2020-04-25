@@ -1,7 +1,5 @@
-
-
-
-var filesToLoad = 14;
+var loading = true;
+var filesToLoad = 13;
 var loadCounter = 0;
 var canvas_size = 600;
 var agentRightImg;
@@ -57,35 +55,37 @@ function loadCallback() {
   loadCounter++;
   if (loadCounter == filesToLoad) {
       loading = false;
+      console.log("finish loading...");
   }
 }
 function keyPressed() {
   // console.log(keyCode);
-  if (keyCode === UP_ARROW) {
-    wumpusWorld.hero.turnUp();
-  }
-  else if (keyCode === DOWN_ARROW) {
-    wumpusWorld.hero.turnDown();
-  } 
-  else if (keyCode === LEFT_ARROW) {
-    wumpusWorld.hero.turnLeft();
-
-  } 
-  else if (keyCode === RIGHT_ARROW) {
-    wumpusWorld.hero.turnRight();
-
-  } 
-  //shoot
-  else if (keyCode === ENTER) {
-    wumpusWorld.hero.shoot();
-  } 
-  //escape
-  else if (keyCode === 16){
-    wumpusWorld.hero.escape();
-  }
-  // pick up key
-  else if (keyCode === 32){
-    wumpusWorld.hero.pickUpGoldKey();
+  if(!loading){
+    if (keyCode === UP_ARROW) {
+      wumpusWorld.hero.turnUp();
+    }
+    else if (keyCode === DOWN_ARROW) {
+      wumpusWorld.hero.turnDown();
+    } 
+    else if (keyCode === LEFT_ARROW) {
+      wumpusWorld.hero.turnLeft();
+  
+    } 
+    else if (keyCode === RIGHT_ARROW) {
+      wumpusWorld.hero.turnRight();
+    } 
+    //shoot
+    else if (keyCode === ENTER) {
+      wumpusWorld.hero.shoot();
+    } 
+    //escape
+    else if (keyCode === 16){
+      wumpusWorld.hero.escape();
+    }
+    // pick up key
+    else if (keyCode === 32){
+      wumpusWorld.hero.pickUpGoldKey();
+    }
   }
 }
 
@@ -93,17 +93,22 @@ function keyPressed() {
 function draw() {
   background(255);
   smooth();
-  wumpusWorld.display();
   let gameOver = document.getElementById("gameover");
   let score = document.getElementById("score");
-  score.innerHTML = "Score: " + wumpusWorld.score;
-  gameOver.innerHTML = "";
-  if(wumpusWorld.gameover){
-    if(wumpusWorld.hero.status){
-        gameOver.innerHTML = "Climb out of the Cave!\n";
+  if(!loading){
+    wumpusWorld.display();
+    score.innerHTML = "Score: " + wumpusWorld.score;
+    gameOver.innerHTML = "";
+    if(wumpusWorld.gameover){
+      if(wumpusWorld.hero.status){
+          gameOver.innerHTML = "Climb out of the Cave!\n";
+      }
+      else{
+        gameOver.innerHTML = "You Died Game Over!\n";
+      }
     }
-    else{
-      gameOver.innerHTML = "You Died Game Over!\n";
-    }
+  }
+  else{
+    gameOver.innerHTML = "Loading...\n";
   }
 }
