@@ -13,6 +13,7 @@ class hero{
         // check ghost
             if(!this.world.ghost.killed && this.pos[0] === this.world.ghost.pos[0] && this.pos[1] === this.world.ghost.pos[1]){
                 this.facingDirection = DIRECTION.DEAD;
+                this.world.score-=1000;
                 this.status = false;
                 this.world.ghost.displayed = true;
             }
@@ -20,6 +21,7 @@ class hero{
         // check pit
             for(let p of this.world.pits.pitsArray){
                 if(p.pos[0] === this.pos[0] && p.pos[1] === this.pos[1]){
+                    this.world.score-=1000;
                     this.status = false;
                     this.facingDirection = DIRECTION.DEAD;
                     break;
