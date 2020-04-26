@@ -15,7 +15,7 @@ class Wumpus_world {
 
     world_Setup(){
         //hero
-
+        this.hero = new hero([0,0], this);
         //cells
         this.cells = new cells(this);
         for(let y = 0; y < this.side_number; y++){
@@ -23,7 +23,6 @@ class Wumpus_world {
                 this.cells.addingCell(new cell([x,y], this.cell_canvas_size, this));
             }
         }
-        this.hero = new hero([0,0], this);
         this.cells.cellsArray[0].displayed = true;
         //ghost
         let ghost_x = Math.floor(Math.random() * this.side_number);
@@ -48,7 +47,7 @@ class Wumpus_world {
 
         //pits
         this.pits = new pits(this);
-        let pits_number = Math.floor(0.1 * this.cells_size);
+        let pits_number = Math.floor(0.2 * this.cells_size);
         let mySet = new Set();
         while(mySet.size < pits_number){
             let x = Math.floor(Math.random() * this.side_number);

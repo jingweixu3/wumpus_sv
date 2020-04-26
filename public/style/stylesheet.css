@@ -58,7 +58,7 @@ body{
 }
 
 
-.container{
+.wumpus{
     width: fit-content;
     display: flex;
     flex-wrap: wrap;
@@ -81,7 +81,7 @@ body{
     justify-content: center;
     margin: 30px auto 0px 30px;
     color: coral;
-    font-size: 100px;
+    font-size: 60px;
     border: 60px;
 
 }
