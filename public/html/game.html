@@ -46,7 +46,7 @@
                 </li>
                 <li class="nav-item active">
                   <a class="nav-link" href="" data-toggle="modal" data-target="#controlsModal">
-                    Controls
+                    Controls&Rules
                   </a>
                 </li>
                 <li class="nav-item active">
@@ -60,7 +60,7 @@
 
         
         <div class="container">
-            <div id="wumpus"></div>
+            <div class="wumpus" id="wumpus"></div>
             <div class="info">
                 <div class="gameover" ><h1 class="gameover" id="gameover"> </h1></div>
                 <div class="score" ><h2 class="score" id="score"> </h2></div>
@@ -85,6 +85,8 @@
                     2. Try to escap with as many scores as possible<br>
                     3. Escape from the initial place, upper left corner<br>
                     4. You only have one chance to shoot the ghost<br>
+                    5. If you died, the score will be deduced 1000.<br> 
+                    6. If you pick up the gold, the score will be added 1000 and each step is -1.<br>
                 <img src="img/controls.png" style="width:100%">
                 </div>
                 <div class="modal-footer">

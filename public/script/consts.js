@@ -25,3 +25,9 @@ const SCORE = {
     DEAD: -1000,
     STEP: -1
 }
+
+const AICELLSTATUS = {
+    UNKNOWN:0,
+    PERCEIVED_CLEAR:1,
+    VISITED:2
+}
