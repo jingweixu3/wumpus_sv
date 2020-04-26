@@ -57,6 +57,9 @@ body{
     text-decoration: none;
 }
 
+.container{
+    display: flexbox;
+}
 
 .wumpus{
     width: fit-content;

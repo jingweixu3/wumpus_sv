@@ -27,11 +27,17 @@ class Wumpus_world {
         //ghost
         let ghost_x = Math.floor(Math.random() * this.side_number);
         let ghost_y = Math.floor(Math.random() * this.side_number);
-        while(ghost_x === this.hero.pos[0] && ghost_y === this.hero.pos[1]
-            && ((ghost_x === 0 && ghost_y === 1) || (ghost_y ===0 && ghost_x === 1))){
+        console.log(this.hero.pos[0]+ " " + this.hero.pos[1]);
+
+        while(ghost_x === this.hero.pos[0] && ghost_y === this.hero.pos[1] ||
+             (ghost_x === this.hero.pos[0] && ghost_y=== (this.hero.pos[1] + 1) ||
+             (ghost_x === (this.hero.pos[0] + 1) && ghost_y === this.hero.pos[1]))){
+
             ghost_x = Math.floor(Math.random() * this.side_number);
             ghost_y = Math.floor(Math.random() * this.side_number);
         }
+        console.log(ghost_x+ " " + ghost_y);
+
         this.ghost = new ghost([ghost_x, ghost_y], this);
 
 
