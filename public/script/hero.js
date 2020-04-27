@@ -37,7 +37,7 @@ class hero{
             this.world.key.displayed = true;
             this.world.ghost.displayed = true;
             lose_sound.play();
-            lose_sound.setVolume(0.08);
+            lose_sound.setVolume(0.5);
         }
 
     }
@@ -45,18 +45,19 @@ class hero{
     playsound(){
         if(this.world.cells.cellsArray[this.pos[1]*this.world.side_number + this.pos[0]].status === CELLSTATUS.GHOST){
             ghost_sound.play();
-            ghost_sound.setVolume(0.06);
+            ghost_sound.setVolume(0.6);
             console.log("ghost");
         }
         else if (this.world.cells.cellsArray[this.pos[1]*this.world.side_number + this.pos[0]].status === CELLSTATUS.GROUND_PIT){
             wind_sound.play();
+            wind_sound.setVolume(1.0);
             console.log("wind");
 
         }
         else if (this.world.cells.cellsArray[this.pos[1]*this.world.side_number + this.pos[0]].status === CELLSTATUS.BOTH){
             wind_sound.play();
             ghost_sound.play();
-            ghost_sound.setVolume(0.06);
+            ghost_sound.setVolume(0.6);
         }
         else{
             wind_sound.stop();
@@ -209,6 +210,8 @@ class hero{
     pickUpGoldKey(){
         let flag = false;
         if(!this.gameover && this.status && !this.world.key.picked && this.pos[0] === this.world.key.pos[0] && this.pos[1] === this.world.key.pos[1]){
+            console.log("picked!");
+
             this.world.key.picked = true;
             this.world.score += SCORE.GOLD;
             this.world.key.displayed = false;
@@ -221,7 +224,7 @@ class hero{
             this.alive();
             this.world.gameover = true;
             victory_sound.play();
-            victory_sound.setVolume(0.08);
+            victory_sound.setVolume(0.6);
         }
     }
 
@@ -249,6 +252,81 @@ class hero{
             this.pos[1] * this.world.cell_canvas_size, 
             this.world.cell_canvas_size, this.world.cell_canvas_size);
 
+    }
+
+
+    
+    //AI() function
+    AIturnLeft(){
+        if(!this.gameover && this.status){
+            if(this.status === true && this.pos[0] > 0){
+                this.pos[0]--;
+                this.world.score += SCORE.STEP;
+                // this.playsound();
+
+            }
+            
+
+            this.alive();
+            this.world.cells.cellsArray[this.pos[1] * this.world.side_number + this.pos[0]].displayed = true;
+            if(this.status && !this.world.key.picked && this.pos[0] === this.world.key.pos[0] && this.pos[1] === this.world.key.pos[1]){
+                this.world.key.displayed = true;
+            }
+        }
+    }
+
+    AIturnRight(){
+        if(!this.gameover && this.status){
+            // console.log("turnright");
+            if(this.status === true && this.pos[0] < this.world.side_number - 1){
+                this.pos[0]++;
+                this.world.score += SCORE.STEP;
+                // this.playsound();
+
+            }
+            this.alive();
+
+            this.world.cells.cellsArray[this.pos[1] * this.world.side_number + this.pos[0]].displayed = true;
+    
+            if(this.status && !this.world.key.picked && this.pos[0] === this.world.key.pos[0] && this.pos[1] === this.world.key.pos[1]){
+                this.world.key.displayed = true;
+            }
+        }
+    }
+    
+    AIturnUp(){
+        if(!this.gameover && this.status){
+            if(this.status === true && this.pos[1] > 0){
+                this.pos[1]--;
+                this.world.score += SCORE.STEP;
+                // this.playsound();
+
+            }
+
+
+            this.alive();
+            this.world.cells.cellsArray[this.pos[1] * this.world.side_number + this.pos[0]].displayed = true;
+            if(this.status && !this.world.key.picked && this.pos[0] === this.world.key.pos[0] && this.pos[1] === this.world.key.pos[1]){
+                this.world.key.displayed = true;
+            }
+        }
+
+    }
+
+    AIturnDown(){
+        if(!this.gameover && this.status){
+            if(this.status === true && this.pos[1] < this.world.side_number - 1){
+                this.pos[1]++;
+                this.world.score += SCORE.STEP;
+                // this.playsound();
+
+            }
+            this.alive();
+            this.world.cells.cellsArray[this.pos[1] * this.world.side_number + this.pos[0]].displayed = true;
+            if(this.status && !this.world.key.picked && this.pos[0] === this.world.key.pos[0] && this.pos[1] === this.world.key.pos[1]){
+                this.world.key.displayed = true;
+            }
+        }
     }
 
 }
