@@ -36,22 +36,52 @@ class hero{
             }
             this.world.key.displayed = true;
             this.world.ghost.displayed = true;
+            lose_sound.play();
+            lose_sound.setVolume(0.08);
         }
 
     }
 
+    playsound(){
+        if(this.world.cells.cellsArray[this.pos[1]*this.world.side_number + this.pos[0]].status === CELLSTATUS.GHOST){
+            ghost_sound.play();
+            ghost_sound.setVolume(0.06);
+            console.log("ghost");
+        }
+        else if (this.world.cells.cellsArray[this.pos[1]*this.world.side_number + this.pos[0]].status === CELLSTATUS.GROUND_PIT){
+            wind_sound.play();
+            console.log("wind");
+
+        }
+        else if (this.world.cells.cellsArray[this.pos[1]*this.world.side_number + this.pos[0]].status === CELLSTATUS.BOTH){
+            wind_sound.play();
+            ghost_sound.play();
+            ghost_sound.setVolume(0.06);
+        }
+        else{
+            wind_sound.stop();
+            ghost_sound.stop();
+        }
+
+    }
+
+
     //keyPressed() function
     turnLeft(){
         if(!this.gameover && this.status){
+
             if (this.facingDirection === DIRECTION.LEFT){
                 if(this.status === true && this.pos[0] > 0){
                     this.pos[0]--;
                     this.world.score += SCORE.STEP;
+                    this.playsound();
+
                 }
             }
             else{
                 this.facingDirection = DIRECTION.LEFT;
             }
+
             this.alive();
             this.world.cells.cellsArray[this.pos[1] * this.world.side_number + this.pos[0]].displayed = true;
             if(this.status && !this.world.key.picked && this.pos[0] === this.world.key.pos[0] && this.pos[1] === this.world.key.pos[1]){
@@ -66,12 +96,16 @@ class hero{
                 if(this.status === true && this.pos[0] < this.world.side_number - 1){
                     this.pos[0]++;
                     this.world.score += SCORE.STEP;
+                    this.playsound();
+
                 }
             }
             else{
                 this.facingDirection = DIRECTION.RIGHT;
             }
+
             this.alive();
+
             this.world.cells.cellsArray[this.pos[1] * this.world.side_number + this.pos[0]].displayed = true;
     
             if(this.status && !this.world.key.picked && this.pos[0] === this.world.key.pos[0] && this.pos[1] === this.world.key.pos[1]){
@@ -88,11 +122,14 @@ class hero{
                 if(this.status === true && this.pos[1] > 0){
                     this.pos[1]--;
                     this.world.score += SCORE.STEP;
+                    this.playsound();
+
                 }
             }
             else{
                 this.facingDirection = DIRECTION.UP;
             }
+
             this.alive();
             this.world.cells.cellsArray[this.pos[1] * this.world.side_number + this.pos[0]].displayed = true;
             if(this.status && !this.world.key.picked && this.pos[0] === this.world.key.pos[0] && this.pos[1] === this.world.key.pos[1]){
@@ -104,10 +141,13 @@ class hero{
 
     turnDown(){
         if(!this.gameover && this.status){
+
             if(this.facingDirection === DIRECTION.DOWN){
                 if(this.status === true && this.pos[1] < this.world.side_number - 1){
                     this.pos[1]++;
                     this.world.score += SCORE.STEP;
+                    this.playsound();
+
                 }
             }
             else{
@@ -142,6 +182,7 @@ class hero{
 
             if(ghost_x === this.world.ghost.pos[0] && ghost_y === this.world.ghost.pos[1]){
                 this.world.ghost.killed = true; 
+                shoot_sound.play();
                 this.world.cells.cellsArray[ghost_x + ghost_y * this.world.side_number].displayed = true;
                 // update cell around ghost
                 let xpos = [-1,1,0,0];
@@ -172,12 +213,15 @@ class hero{
             this.world.score += SCORE.GOLD;
             this.world.key.displayed = false;
             flag = true;
+            bell_sound.play();
         }
         if(!this.gameover  && !flag && this.status && this.pos[0] == 0 && this.pos[1] == 0){
             console.log("game over");
             this.status = true;
             this.alive();
             this.world.gameover = true;
+            victory_sound.play();
+            victory_sound.setVolume(0.08);
         }
     }
 

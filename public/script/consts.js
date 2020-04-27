@@ -27,7 +27,8 @@ const SCORE = {
 }
 
 const AICELLSTATUS = {
-    UNKNOWN:0,
-    PERCEIVED_CLEAR:1,
-    VISITED:2
+    UNKNOWN: 0,
+    PERCEIVED_CLEAR: 1,
+    PERCEIVED_DANGER: 2,
+    VISITED:3
 }
