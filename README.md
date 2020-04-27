@@ -4,7 +4,7 @@ The Wumpus world is a simple world example to illustrate the worth of a knowledg
 
 This is the core game to implement an agent for in the future.
 
-![](img/intro.page)
+![](img/intro.png)
 
 #### There are also some components which can help the agent to navigate the cave. These components are given as follows:
 
@@ -30,7 +30,7 @@ The game ends if either agent dies or came out of the cave.
 
 ## Game Features
 
-![](img/home.page)
+![](img/home.png)
 
 Player Mode: Player is able to play and replay the game
 
