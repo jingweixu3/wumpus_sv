@@ -36,7 +36,7 @@ Player Mode: Player is able to play and replay the game
 
 AI Mode: AI explore the Map 
 
-Player vs. AI Mode: Player compete with AI to see who can get higher score
+Player vs. AI Mode(Coming Soon): Player compete with AI to see who can get higher score
 
 ## Low Level Details
 
