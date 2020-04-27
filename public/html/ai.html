@@ -1,7 +1,7 @@
 <html>
     <head>
         <title>Wumpus World</title>
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
             integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -16,7 +16,9 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.sound.js"></script>
         <link rel="stylesheet" type= "text/css" href="/style/stylesheet.css">
-        <script src="../script/game.js"></script>
+        <script src="../script/aigame.js"></script>
+        <script src="../script/ai_cell.js"></script>
+        <script src="../script/ai_world.js"></script>
         <script src="../script/cell.js"></script>
         <script src="../script/cells.js"></script>
         <script src="../script/consts.js"></script>
@@ -31,7 +33,7 @@
     <body>
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="">Wumpus World</a>
+            <a class="navbar-brand" href="/">Wumpus World</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
               aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -57,13 +59,14 @@
               </ul>
             </div>
         </nav>
-
-        
         <div class="container">
-            <div class="wumpus" id="wumpus"></div>
+            <div class="canvas-container" id="wumpus"></div>
+
             <div class="info">
-                <div class="gameovercontainer" ><h1 class="gameover" id="gameover"> </h1></div>
-                <div class="scorecontainer" ><h2 class="score" id="score"> </h2></div>
+                <label class="gameover" id="gameover"></label><br>
+                <label class="score" id="score">Score:</label><br>
+            </div>
+            <div class="button">            
                 <button id="restart" type="button" class="btn btn-dark btn-lg" onclick="restart()">Restart</button>
             </div>
         </div>

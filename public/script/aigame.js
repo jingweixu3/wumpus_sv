@@ -1,7 +1,7 @@
 var loading = true;
-var filesToLoad = 13;
+var filesToLoad = 17;
 var loadCounter = 0;
-var canvas_size = 600;
+var canvas_size = 560;
 var agentRightImg;
 var agentLeftImg;
 var agentUpImg;
@@ -15,7 +15,13 @@ var ghostImg;
 var ghostDeadImg;
 var keyImg;
 var pitImg;
-var wumpusWorld;
+let victory_sound;
+let lose_sound;
+let bell_sound;
+let wind_sound;
+let ghost_sound;
+let shoot_sound;
+var wumpus_AI_World;
 var side_number = 5;
 
 function loadAssets(callback){
@@ -32,7 +38,12 @@ function loadAssets(callback){
   ghostDeadImg = loadImage('/img/ghostDead.png',callback);
   keyImg = loadImage('/img/goldkey.png',callback);
   pitImg = loadImage('/img/pit.jpg',callback);
-
+  bell_sound = loadSound('/sounds/bell.wav', callback);
+  victory_sound = loadSound('/sounds/victory.wav', callback);
+  lose_sound = loadSound('/sounds/lose.wav', callback);
+  wind_sound = loadSound('/sounds/wind.wav', callback);
+  ghost_sound = loadSound('/sounds/ghost.wav', callback);
+  shoot_sound = loadSound('/sounds/shoot.wav', callback);
 }
 
 function setup() {
@@ -63,10 +74,10 @@ function draw() {
   let score = document.getElementById("score");
   if(!loading){
     wumpus_AI_World.display();
-    score.innerHTML = "Score: " + wumpusWorld.score;
+    score.innerHTML = "Score: " + wumpus_AI_World.wumpusworld.score;
     gameOver.innerHTML = "";
     if(wumpus_AI_World.wumpusworld.gameover){
-      if(wumpusWorld.wumpusworld.hero.status){
+      if(wumpus_AI_World.wumpusworld.hero.status){
           gameOver.innerHTML = "Climb out of the Cave!\n";
       }
       else{
