@@ -300,10 +300,7 @@ class hero{
                 this.pos[1]--;
                 this.world.score += SCORE.STEP;
                 // this.playsound();
-
             }
-
-
             this.alive();
             this.world.cells.cellsArray[this.pos[1] * this.world.side_number + this.pos[0]].displayed = true;
             if(this.status && !this.world.key.picked && this.pos[0] === this.world.key.pos[0] && this.pos[1] === this.world.key.pos[1]){
@@ -313,13 +310,12 @@ class hero{
 
     }
 
-    AIturnDown(){
+    AIturnDown(){    
         if(!this.gameover && this.status){
             if(this.status === true && this.pos[1] < this.world.side_number - 1){
                 this.pos[1]++;
                 this.world.score += SCORE.STEP;
                 // this.playsound();
-
             }
             this.alive();
             this.world.cells.cellsArray[this.pos[1] * this.world.side_number + this.pos[0]].displayed = true;

@@ -1,5 +1,5 @@
 var loading = true;
-var filesToLoad = 17;
+var filesToLoad = 19;
 var loadCounter = 0;
 var canvas_size = 560;
 var agentRightImg;
@@ -23,6 +23,7 @@ let ghost_sound;
 let shoot_sound;
 var wumpus_AI_World;
 var side_number = 5;
+var intervalId;
 
 function loadAssets(callback){
   agentRightImg = loadImage('/img/agentRight.png',callback);
@@ -53,11 +54,16 @@ function setup() {
   wumpus_AI_World = new AI_world(side_number);
 }
 
+function start(){
+  intervalId = setInterval(function() {wumpus_AI_World.makeDecision()},300);   
+}
+
 function restart(){
   console.log("restart");
   wumpus_AI_World = new AI_world(side_number);
   let gameOver = document.getElementById("gameover");
   gameOver.innerHTML = "";
+  clearInterval(intervalId);
 }
 
 function loadCallback() {

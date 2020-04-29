@@ -1,5 +1,5 @@
 var loading = true;
-var filesToLoad = 17;
+var filesToLoad = 19;
 var loadCounter = 0;
 var canvas_size = 560;
 var agentRightImg;
@@ -43,8 +43,7 @@ function loadAssets(callback){
   lose_sound = loadSound('/sounds/lose.wav', callback);
   wind_sound = loadSound('/sounds/wind.wav', callback);
   ghost_sound = loadSound('/sounds/ghost.wav', callback);
-  shoot_sound = loadSound('/sounds/shoot.wav', callback);;
-
+  shoot_sound = loadSound('/sounds/shoot.wav', callback);
 }
 
 function setup() {

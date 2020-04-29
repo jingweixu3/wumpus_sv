@@ -7,72 +7,78 @@ class AI_world{
         this.move_direction = DIRECTION.DOWN;
         this.complete_scan = false;
         this.initialize();
-        this.decisioncall;
         this.key = false;
+        this.escape = false;
+        this.pathInfo = undefined;
     }
     initialize(){
-        this.ai_cells = new Array();
-        this.wumpusworld = new Wumpus_world(this.side_number);
-        this.wumpusworld.initialize_cell_status();
-        this.decisioncall = 25;
-
-
-        for(let y = 0; y < this.side_number; y++){
-            for(let x = 0; x < this.side_number; x++){
-                this.ai_cells.push(new AI_cell([x,y]));
+            this.ai_cells = new Array();
+            this.wumpusworld = new Wumpus_world(this.side_number);
+            this.wumpusworld.initialize_cell_status();    
+    
+            for(let y = 0; y < this.side_number; y++){
+                for(let x = 0; x < this.side_number; x++){
+                    this.ai_cells.push(new AI_cell([x,y]));
+                }
             }
-        }
-        this.ai_cells[0].status = AICELLSTATUS.VISITED;
-        while(this.decisioncall > 0){
-            this.makeDecision();
-            this.decisioncall--;
-        }
+            this.ai_cells[0].status = AICELLSTATUS.VISITED;
     }
     display(){
         this.wumpusworld.display();
     }
 
-    makeDecision(){
+    async makeDecision(){
         if(!this.ai_game_over){
-            let curcell = this.ai_cells[this.side_number * this.wumpusworld.hero.pos[1] + this.wumpusworld.hero.pos[0]];
-            this.update_around_cell();
-            let next_cell = this.find_unvisited_safe_cell();
-
-            let pathInfo;
-            if(next_cell === undefined || this.key){
-                // go back to origin
-                pathInfo = this.smallestStep(curcell, this.ai_cells[0]);
-                for (let i = 1; i < pathInfo.path.length; i++){
-                    this.move(pathInfo.path[i-1], pathInfo.path[i]);
+            if(this.pathInfo !== undefined){
+                if(this.pathInfo.length > 1 && this.key === true){
+                    this.wumpusworld.hero.pickUpGoldKey();
+                    this.key = undefined;
                 }
-                this.wumpusworld.hero.pickUpGoldKey();
-                this.ai_game_over = true;
+                if(this.pathInfo.length > 1){
+                    this.move(this.pathInfo[0], this.pathInfo[1]);
+                    
+                    if(this.key === false){
+                        this.checkKey();
+                    }
+                    this.pathInfo.shift();
+                    if(this.key === true){
+                        this.escape = true;
+                        this.pathInfo = undefined;
+                    }  
+                }
+                else{
+                    if(this.escape === true){
+                        this.wumpusworld.hero.pickUpGoldKey();
+                        this.ai_game_over = true;
+                    }
+                    this.pathInfo = undefined;
+                }
             }
             else{
-                this.ai_cells[next_cell.cell.pos[1] * this.side_number + next_cell.cell.pos[0]].status = AICELLSTATUS.VISITED;
-                // go to the nearest perceived safe cell
-                for (let i = 1; i < next_cell.path.length; i++){
-                    this.move(next_cell.path[i-1], next_cell.path[i]);
-                    if(this.checkKey()){
-                        break;
-                    }
+                let curcell = this.ai_cells[this.side_number * this.wumpusworld.hero.pos[1] + this.wumpusworld.hero.pos[0]];
+                this.update_around_cell();
+                let next_cell = this.find_unvisited_safe_cell(); 
+                if(next_cell === undefined || this.key){
+                    // go back to origin
+                    this.pathInfo = this.smallestStep(curcell, this.ai_cells[0]).path;
+                    this.escape = true;
                 }
-                // console.log("call: " + this.decisioncall+ " pos" + this.wumpusworld.hero.pos);
-            }
-        }  
+                else{
+                    // go to the nearest perceived safe cell
+                    this.pathInfo = next_cell.path;
+                }
+                    // console.log("call: " + this.decisioncall+ " pos" + this.wumpusworld.hero.pos);
+            }  
+        }           
     }
     checkKey(){
         
         if(this.wumpusworld.hero.pos[0] === this.wumpusworld.key.pos[0] &&
             this.wumpusworld.hero.pos[1] === this.wumpusworld.key.pos[1]){
-                console.log("pick");
-            this.wumpusworld.hero.pickUpGoldKey();
+            console.log("pick");
             this.key = true;
         }
     }
-
-
-
     //bfs
     smallestStep(cell1, cell2){
         // console.log(cell1);
@@ -156,7 +162,6 @@ class AI_world{
         for(let next_cell of this.ai_cells){
             if(this.checkSafe(next_cell)){
                 let pathInfo = this.smallestStep(curCell, next_cell);
-                console.log(pathInfo.cell.pos ,pathInfo.path.length);
                 if(pathInfo.steps < smallest_step){
                     nearest_pathInfo = pathInfo;
                     smallest_step = pathInfo.steps; 
@@ -285,7 +290,7 @@ class AI_world{
         }     
     }
 
-    async move(cell1, cell2){
+    move(cell1, cell2){
         console.log(cell1.pos + " -->" + cell2.pos);
         if(cell2.pos[0] === cell1.pos[0]){
             if(cell2.pos[1] === cell1.pos[1] + 1){
