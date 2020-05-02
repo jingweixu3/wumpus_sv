@@ -75,7 +75,6 @@ function loadCallback() {
   }
 }
 function keyPressed() {
-  // console.log(keyCode);
   if(!loading){
     if (keyCode === UP_ARROW) {
       wumpusWorld.hero.turnUp();

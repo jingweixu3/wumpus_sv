@@ -1,3 +1,4 @@
+
 class Wumpus_world {
     constructor(side_number){
         this.cells_size = side_number * side_number; // number of totoal cells
@@ -112,4 +113,3 @@ class Wumpus_world {
         this.key.display();
     }
 }
-

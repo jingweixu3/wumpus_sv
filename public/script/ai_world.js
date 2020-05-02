@@ -67,7 +67,6 @@ class AI_world{
                     // go to the nearest perceived safe cell
                     this.pathInfo = next_cell.path;
                 }
-                    // console.log("call: " + this.decisioncall+ " pos" + this.wumpusworld.hero.pos);
             }  
         }           
     }
@@ -75,21 +74,17 @@ class AI_world{
         
         if(this.wumpusworld.hero.pos[0] === this.wumpusworld.key.pos[0] &&
             this.wumpusworld.hero.pos[1] === this.wumpusworld.key.pos[1]){
-            console.log("pick");
             this.key = true;
         }
     }
     //bfs
     smallestStep(cell1, cell2){
-        // console.log(cell1);
-        // console.log(cell2);
         let pathInfo = {cell:cell2, steps:undefined,path:[]};
         let visited_set = new Set();
         let parentsMap = new Map();
         let array = new Array();
         visited_set.add(cell1);
         array.push(cell1);
-        // console.log(array);
         while(array.length > 0){
             let cell = array[0];
             if(array[array.length-1] === cell2){
@@ -97,15 +92,12 @@ class AI_world{
             }
             array.shift();
             let neighbors = this.getneighbor(cell);
-            // console.log(neighbors);
             for (let i = 0; i < neighbors.length; i++){
-                // console.log("break");
 
                 if(neighbors[i] === cell2){
                     parentsMap.set(neighbors[i],cell);
                     visited_set.add(neighbors[i]);
                     array.push(neighbors[i]);
-                    // console.log("break");
                     break;
                 }
                 if(neighbors[i].status === AICELLSTATUS.VISITED && !visited_set.has(neighbors[i])){
@@ -115,7 +107,6 @@ class AI_world{
                 }
             }
         }
-        // console.log(parentsMap);
         let path = [];
         path.push(cell2);
         if(parentsMap.size>0){
@@ -129,8 +120,6 @@ class AI_world{
             pathInfo.steps = path.length;
             pathInfo.path = path;
         }
-        // console.log(pathInfo);
-
         return pathInfo;
     }
 
@@ -194,8 +183,6 @@ class AI_world{
     update_around_cell(){
         let hero_posX = this.wumpusworld.hero.pos[0];
         let hero_posY = this.wumpusworld.hero.pos[1];
-        // perceive around cells
-        // console.log(this.wumpusworld.hero.pos + this.wumpusworld.cells.cellsArray[this.side_number * hero_posY + hero_posX].status);
         if(this.wumpusworld.cells.cellsArray[this.side_number * hero_posY + hero_posX].status === CELLSTATUS.CLEAR){
             let posX = [-1,1,0,0];
             let posY = [0,0,1,-1];
