@@ -101,7 +101,6 @@ function keyPressed() {
   }
 }
 
-
 function draw() {
   background(255);
   smooth();

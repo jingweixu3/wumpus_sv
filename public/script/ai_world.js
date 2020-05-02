@@ -27,7 +27,7 @@ class AI_world{
         this.wumpusworld.display();
     }
 
-    async makeDecision(){
+    makeDecision(){
         if(!this.ai_game_over){
             if(this.pathInfo !== undefined){
                 if(this.pathInfo.length > 1 && this.key === true){
