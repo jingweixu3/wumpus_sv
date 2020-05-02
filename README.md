@@ -60,3 +60,18 @@ Express --- send html to players
 P5.js --- p5.js is a JavaScript library, mainly used to sketch and provides sound for the game by using setup(), restart(), draw()
 sound.play() etc.
 
+## Getting started
+### To get the Node server running locally:
+
+- Clone this repo
+- Install all required dependencies
+
+```bash
+$ npm install
+```
+- Run 
+
+```bash
+$ node index.js
+```
+- Open website at http://localhost:3000
