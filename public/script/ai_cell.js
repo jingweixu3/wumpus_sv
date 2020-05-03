@@ -5,6 +5,5 @@ class AI_cell{
         this.pit_danger = 0;
         this.ghost_danger = 0;
         this.perceived_danger_count = 0;
-
     }
 }

@@ -94,21 +94,23 @@
             </div>
             <div class="modal-body">
                 The Wumpus world is a simple world example to illustrate the worth of a knowledge-based agent and to represent
-                knowledge
-                representation. It was inspired by a video game Hunt the Wumpus by Gregory Yob in 1973. <br>
+                knowledge representation. It was inspired by a video game Hunt the Wumpus by Gregory Yob in 1973. <br>
                 <br>
                 The Wumpus world is a cave which has rooms connected with passageways. We have a knowledge-based agent who
-                will go
-                forward in this world. The cave has a room with a beast which is called Wumpus, who eats anyone who enters the
-                room. The
-                Wumpus can be shot by the agent, but the agent has to find an arrow first, which spawns somewhere in the cave.
-                In the
-                Wumpus world, there are pits which are bottomless, and if the agent falls in a pit, he will be stuck there
-                forever. The
-                agent goal is to find the arrow and kill the Wumpus without falling into a pit or getting killed by the
-                Wumpus. <br>
-                In the rooms directly adjacent to a pit, the agent can perceive a breeze.
-                In the rooms directly adjacent to the wumpus, the agent can perceive a stench.
+                will go forward in this world. The cave has a room with a beast which is called Wumpus, who eats anyone who enters the
+                room. The Wumpus can be shot by the agent, but the agent only has one shooting chance. Once the wumpus being killed, the 
+                cell of the wumpus would be displayed.
+                In the Wumpus world, there are pits which are bottomless, and if the agent falls in a pit, he will be stuck there
+                forever. 
+                There is also a gold which is in a safe room. 
+                The agent goal is to avoid being killed by the wumpus and falling into the pits. Tries his best to find the gold 
+                and go back to the original place to get out of the cave. <br><br>
+                In the rooms directly adjacent to a pit, the agent can perceive a breeze.<br>
+                In the rooms directly adjacent to the wumpus, the agent can perceive a stench.<br>
+                If agent finds gold, 1000 points would be added to the score.<br>
+                If agent falls into the pit or is killed by the wumpus, -1000 points would be added to the score.<br>
+                Each step would take 1 point off.<br>
+                Players need to return to the cave with/without gold with higher score.<br>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>

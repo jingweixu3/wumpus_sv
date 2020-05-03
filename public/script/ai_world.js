@@ -27,6 +27,12 @@ class AI_world{
         this.wumpusworld.display();
     }
 
+
+    /* AI algorithm: if the pathInfo is undefiended that means AI haven't finished moving, so don't need to make decision
+    if it is undefined, AI first update the enviornment ---> obtain more perceived cells.
+    then find the nearest safe perceived cell and added to the pathInfo.
+    then AI move by using the pathInfo  
+    */
     makeDecision(){
         if(!this.ai_game_over){
             if(this.pathInfo !== undefined){
@@ -91,7 +97,7 @@ class AI_world{
                 break;
             }
             array.shift();
-            let neighbors = this.getneighbor(cell);
+            let neighbors = this.getneighbors(cell);
             for (let i = 0; i < neighbors.length; i++){
 
                 if(neighbors[i] === cell2){
@@ -123,7 +129,7 @@ class AI_world{
         return pathInfo;
     }
 
-    getneighbor(cell){
+    getneighbors(cell){
         let posX = [-1,1,0,0];
         let posY = [0,0,1,-1];
         let neighbors = [];
