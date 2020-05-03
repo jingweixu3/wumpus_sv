@@ -260,7 +260,6 @@ class hero{
             if(this.status === true && this.pos[0] > 0){
                 this.pos[0]--;
                 this.world.score += SCORE.STEP;
-                // this.playsound();
 
             }
             
@@ -275,11 +274,9 @@ class hero{
 
     AIturnRight(){
         if(!this.gameover && this.status){
-            // console.log("turnright");
             if(this.status === true && this.pos[0] < this.world.side_number - 1){
                 this.pos[0]++;
                 this.world.score += SCORE.STEP;
-                // this.playsound();
 
             }
             this.alive();
@@ -297,7 +294,6 @@ class hero{
             if(this.status === true && this.pos[1] > 0){
                 this.pos[1]--;
                 this.world.score += SCORE.STEP;
-                // this.playsound();
             }
             this.alive();
             this.world.cells.cellsArray[this.pos[1] * this.world.side_number + this.pos[0]].displayed = true;
@@ -313,7 +309,6 @@ class hero{
             if(this.status === true && this.pos[1] < this.world.side_number - 1){
                 this.pos[1]++;
                 this.world.score += SCORE.STEP;
-                // this.playsound();
             }
             this.alive();
             this.world.cells.cellsArray[this.pos[1] * this.world.side_number + this.pos[0]].displayed = true;
